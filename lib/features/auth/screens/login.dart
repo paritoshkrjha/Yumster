@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/common/back_button.dart';
+import 'package:yumster/core/common/loader.dart';
 import 'package:yumster/core/constants/screen_constants.dart';
 import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/core/utils.dart';
@@ -18,10 +19,11 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
+  bool isLoading = false;
   var _enteredEmail = '';
   var _enteredPassword = '';
 
-  handleLogin() {
+  handleLogin() async {
     FocusScope.of(context).unfocus();
     final validate = _formKey.currentState!.validate();
     if (!validate) {
@@ -29,10 +31,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
     _formKey.currentState!.save();
 
-    context.goNamed('loading', pathParameters: {
-      "isLogin": "true",
+    setState(() {
+      isLoading = true;
     });
-    Utils().addDelay(2);
+    await Utils().addDelay(2);
     AuthController().handleLogin(
       email: _enteredEmail,
       password: _enteredPassword,
@@ -40,6 +42,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       onLoginSuccess: () => context.goNamed('home'),
       onLoginFailure: () => context.goNamed('login'),
     );
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   _togglePasswordVisibility() {
@@ -99,6 +105,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             prefixIcon: const Icon(Iconsax.sms),
                             hintText: ScreenConstants
                                 .signInScreenConstants['emailHint']!,
+                            enabled: !isLoading,
+                            disabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black12,
+                              ),
+                            ),
                           ),
                           validator: (newValue) {
                             if (newValue!.isEmpty) {
@@ -135,6 +147,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ),
                             hintText: ScreenConstants
                                 .signInScreenConstants['passwordHint']!,
+                            enabled: !isLoading,
+                            disabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black12,
+                              ),
+                            ),
                           ),
                           obscureText: _isObscure,
                           validator: (value) {
@@ -159,10 +177,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 ),
                               ),
                           onPressed: handleLogin,
-                          child: Text(
-                            ScreenConstants
-                                .signInScreenConstants['buttonText']!,
-                          ),
+                          child: isLoading
+                              ? const CustomLoader()
+                              : Text(
+                                  ScreenConstants
+                                      .signInScreenConstants['buttonText']!,
+                                ),
                         ),
                       ],
                     ),
