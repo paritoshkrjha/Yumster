@@ -17,9 +17,9 @@ class _CustomBottomNavigationBarState
   @override
   Widget build(BuildContext context) {
     return FlashyTabBar(
-      selectedIndex: ref.watch(NavbarIndexProvider),
+      selectedIndex: ref.watch(navbarIndexProvider),
       onItemSelected: (value) {
-        ref.read(NavbarIndexProvider.notifier).state = value;
+        ref.read(navbarIndexProvider.notifier).state = value;
       },
       items: [
         FlashyTabBarItem(

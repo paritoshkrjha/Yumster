@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yumster/data/providers/navbar_index_provider.dart';
+import 'package:yumster/features/home/screens/feed.dart';
 import 'package:yumster/features/home/widgets/bottom_navigation_bar.dart';
 import 'package:yumster/features/home/widgets/drawer.dart';
+import 'package:yumster/features/profile/screens/profile.dart';
+import 'package:yumster/features/starred/screens/starred.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -14,19 +18,42 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final selectedPageIndex = ref.watch(navbarIndexProvider);
+    final seletedPage = kHomeScreen[selectedPageIndex];
+
+    return SafeArea(
+      child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Yumster',
-            style: GoogleFonts.dancingScript().copyWith(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+            kHomeScreenTitle[selectedPageIndex]!,
+            style: selectedPageIndex == 0
+                ? GoogleFonts.dancingScript().copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  )
+                : const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
           ),
-          centerTitle: true,
+          centerTitle: selectedPageIndex == 0,
         ),
         drawer: const CustomDrawer(),
-        body: const Placeholder(),
-        bottomNavigationBar: const CustomBottomNavigationBar());
+        body: seletedPage,
+        bottomNavigationBar: const CustomBottomNavigationBar(),
+      ),
+    );
   }
 }
+
+Map<int, dynamic> kHomeScreen = {
+  0: const HomeFeed(),
+  1: const StarredScreen(),
+  2: const ProfileScreen(),
+};
+
+Map<int, String> kHomeScreenTitle = {
+  0: 'Yumster',
+  1: 'Starred',
+  2: 'Profile',
+};

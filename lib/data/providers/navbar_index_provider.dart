@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final NavbarIndexProvider = StateProvider<int>((ref) {
+final navbarIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
+
