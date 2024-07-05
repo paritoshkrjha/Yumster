@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yumster/features/auth/controller/auth_controller.dart';
 import 'package:yumster/features/home/widgets/bottom_navigation_bar.dart';
 import 'package:yumster/features/home/widgets/drawer.dart';
 
@@ -13,10 +12,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  _handleLogOut() {
-    AuthController().handleLogOut(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
