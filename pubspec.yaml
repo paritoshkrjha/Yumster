@@ -47,6 +47,7 @@ dependencies:
   go_router: ^14.2.0
   fluttertoast: ^8.2.6
   flutter_secure_storage: ^9.2.2
+  flashy_tab_bar2: ^0.0.10
 
 dev_dependencies:
   flutter_test:
