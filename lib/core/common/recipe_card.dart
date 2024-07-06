@@ -9,15 +9,18 @@ class RecipeCard extends StatelessWidget {
   Widget _recipeImg() {
     return Hero(
       tag: 'recipeImage', //TODO: Add unique tag
-      child: Container(
-        width: double.infinity,
-        height: 250,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
         ),
-        child: Image.asset(
-          'assets/tempFood.jpg',
-          fit: BoxFit.cover,
+        child: SizedBox(
+          width: double.infinity,
+          height: 250,
+          child: Image.asset(
+            'assets/tempFood.jpg',
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
@@ -128,9 +131,11 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
