@@ -4,13 +4,14 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class RecipeModel {
+  final String id;
   final String title;
   final String description;
   final List<String> ingredients;
   final List<String> steps;
   final int duration;
   final String imageUrl;
-  final String author;
+  final Map<String, String> author;
   final List<String> likes;
   final int views;
   final String mealType;
@@ -18,6 +19,7 @@ class RecipeModel {
   final List<String> tags;
 
   RecipeModel({
+    required this.id,
     required this.title,
     required this.description,
     required this.ingredients,
@@ -33,13 +35,14 @@ class RecipeModel {
   });
 
   RecipeModel copyWith({
+    String? id,
     String? title,
     String? description,
     List<String>? ingredients,
     List<String>? steps,
     int? duration,
     String? imageUrl,
-    String? author,
+    Map<String, String>? author,
     List<String>? likes,
     int? views,
     String? mealType,
@@ -47,6 +50,7 @@ class RecipeModel {
     List<String>? tags,
   }) {
     return RecipeModel(
+      id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
       ingredients: ingredients ?? this.ingredients,
@@ -64,6 +68,7 @@ class RecipeModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'title': title,
       'description': description,
       'ingredients': ingredients,
@@ -81,6 +86,7 @@ class RecipeModel {
 
   factory RecipeModel.fromMap(Map<String, dynamic> map) {
     return RecipeModel(
+      id: map['id'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
       ingredients: List<String>.from(
@@ -91,7 +97,9 @@ class RecipeModel {
       ),
       duration: map['duration'] as int,
       imageUrl: map['imageUrl'] as String,
-      author: map['author'] as String,
+      author: Map<String, String>.from(
+        (map['author'] as Map<String, String>),
+      ),
       likes: List<String>.from(
         (map['likes'] as List<String>),
       ),
@@ -111,20 +119,21 @@ class RecipeModel {
 
   @override
   String toString() {
-    return 'RecipeModel(title: $title, description: $description, ingredients: $ingredients, steps: $steps, duration: $duration, imageUrl: $imageUrl, author: $author, likes: $likes, views: $views, mealType: $mealType, veg: $veg, tags: $tags)';
+    return 'RecipeModel(id: $id, title: $title, description: $description, ingredients: $ingredients, steps: $steps, duration: $duration, imageUrl: $imageUrl, author: $author, likes: $likes, views: $views, mealType: $mealType, veg: $veg, tags: $tags)';
   }
 
   @override
   bool operator ==(covariant RecipeModel other) {
     if (identical(this, other)) return true;
 
-    return other.title == title &&
+    return other.id == id &&
+        other.title == title &&
         other.description == description &&
         listEquals(other.ingredients, ingredients) &&
         listEquals(other.steps, steps) &&
         other.duration == duration &&
         other.imageUrl == imageUrl &&
-        other.author == author &&
+        mapEquals(other.author, author) &&
         listEquals(other.likes, likes) &&
         other.views == views &&
         other.mealType == mealType &&
@@ -134,7 +143,8 @@ class RecipeModel {
 
   @override
   int get hashCode {
-    return title.hashCode ^
+    return id.hashCode ^
+        title.hashCode ^
         description.hashCode ^
         ingredients.hashCode ^
         steps.hashCode ^

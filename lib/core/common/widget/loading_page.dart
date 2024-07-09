@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yumster/core/common/loader.dart';
+import 'package:yumster/core/common/widget/loader.dart';
 import 'package:yumster/core/constants/screen_constants.dart';
 import 'package:yumster/core/themes/palette.dart';
 

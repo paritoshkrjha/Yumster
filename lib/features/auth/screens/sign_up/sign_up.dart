@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yumster/core/common/stepper.dart';
+import 'package:yumster/core/common/widget/stepper.dart';
 import 'package:yumster/data/providers/page_view_controller_provider.dart';
 import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/features/auth/screens/sign_up/personal_details_screen.dart';

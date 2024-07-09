@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:yumster/core/common/loader.dart';
+import 'package:yumster/core/common/widget/loader.dart';
 import 'package:yumster/core/constants/screen_constants.dart';
 import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/data/providers/user_provider.dart';

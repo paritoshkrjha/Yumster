@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:yumster/core/common/button.dart';
+import 'package:yumster/core/common/widget/button.dart';
 import 'package:yumster/core/constants/constants.dart';
 import 'package:yumster/core/constants/screen_constants.dart';
 import 'package:yumster/core/themes/palette.dart';
