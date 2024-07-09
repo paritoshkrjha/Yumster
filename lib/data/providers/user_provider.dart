@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yumster/core/constants/constants.dart';
 import 'package:yumster/data/model/user_model.dart';
 
 final userProvider =
@@ -8,7 +9,7 @@ class UserNotifier extends StateNotifier<UserModel> {
   UserNotifier()
       : super(
           UserModel(
-            avatarUrl: '',
+            avatar: Constants.kUserAvatarPath,
             email: '',
             name: '',
             password: '',
@@ -30,8 +31,8 @@ class UserNotifier extends StateNotifier<UserModel> {
     state = state.copyWith(password: password);
   }
   
-  void updateAvatarUrl(String avatarUrl) {
-    state = state.copyWith(avatarUrl: avatarUrl);
+  void updateAvatarUrl(String avatar) {
+    state = state.copyWith(avatar: avatar);
   }
 
   void updatePreferences(List<String> preferences) {

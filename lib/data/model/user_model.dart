@@ -10,7 +10,7 @@ class UserModel {
   final List<String> preferences;
   final List<String> posts;
   final List<String> savedPosts;
-  final String avatarUrl;
+  final String avatar;
 
   UserModel({
     required this.name,
@@ -19,7 +19,7 @@ class UserModel {
     required this.preferences,
     required this.posts,
     required this.savedPosts,
-    required this.avatarUrl,
+    required this.avatar,
   });
 
   UserModel copyWith({
@@ -29,7 +29,7 @@ class UserModel {
     List<String>? preferences,
     List<String>? posts,
     List<String>? savedPosts,
-    String? avatarUrl,
+    String? avatar,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -38,7 +38,7 @@ class UserModel {
       preferences: preferences ?? this.preferences,
       posts: posts ?? this.posts,
       savedPosts: savedPosts ?? this.savedPosts,
-      avatarUrl: avatarUrl ?? this.avatarUrl,
+      avatar: avatar ?? this.avatar,
     );
   }
 
@@ -50,7 +50,7 @@ class UserModel {
       'preferences': preferences,
       'posts': posts,
       'savedPosts': savedPosts,
-      'avatarUrl': avatarUrl,
+      'avatar': avatar,
     };
   }
 
@@ -62,7 +62,7 @@ class UserModel {
       preferences: List<String>.from((map['preferences'] as List<String>),),    
       posts: List<String>.from((map['posts'] as List<String>),),    
       savedPosts: List<String>.from((map['savedPosts'] as List<String>),),    
-      avatarUrl: map['avatarUrl'] as String,
+      avatar: map['avatar'] as String,
     );
   }
 
@@ -72,7 +72,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, password: $password, preferences: $preferences, posts: $posts, savedPosts: $savedPosts, avatarUrl: $avatarUrl)';
+    return 'UserModel(name: $name, email: $email, password: $password, preferences: $preferences, posts: $posts, savedPosts: $savedPosts, avatar: $avatar)';
   }
 
   @override
@@ -86,7 +86,7 @@ class UserModel {
       listEquals(other.preferences, preferences) &&
       listEquals(other.posts, posts) &&
       listEquals(other.savedPosts, savedPosts) &&
-      other.avatarUrl == avatarUrl;
+      other.avatar == avatar;
   }
 
   @override
@@ -97,6 +97,6 @@ class UserModel {
       preferences.hashCode ^
       posts.hashCode ^
       savedPosts.hashCode ^
-      avatarUrl.hashCode;
+      avatar.hashCode;
   }
 }

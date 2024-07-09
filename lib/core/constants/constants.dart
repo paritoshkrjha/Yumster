@@ -2,8 +2,9 @@ class Constants {
   static const getStartedLottiePath = 'assets/GetStarted.json';
   static const getStartedSvg = 'assets/getStarted2.svg';
 
-static const String kUserSignUpUrl = 'http://192.168.0.104:8000/user/signup';
+  static const String kUserSignUpUrl = 'http://192.168.0.104:8000/user/signup';
 
+  static const String kUserAvatarPath = 'assets/avatar/userAvatar.png';
 
   static const recipePreferences = {
     'veg': {
@@ -33,7 +34,6 @@ static const String kUserSignUpUrl = 'http://192.168.0.104:8000/user/signup';
     'italian': {
       'label': 'Italian',
       'value': 'italian',
-      
     },
     'mexican': {
       'label': 'Mexican',

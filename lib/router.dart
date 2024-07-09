@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:yumster/core/common/screen/view_recipe_screen.dart';
 import 'package:yumster/core/common/widget/loading_page.dart';
 import 'package:yumster/core/utils.dart';
+import 'package:yumster/data/model/recipe_model.dart';
 import 'package:yumster/features/auth/screens/get_started.dart';
 import 'package:yumster/features/auth/screens/login.dart';
 import 'package:yumster/features/auth/screens/sign_up/sign_up.dart';
@@ -54,11 +55,13 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      name: 'viewRecipe',
-      path: '/view-recipe/:recipeId',
-      builder: (context, state) => ViewRecipeScreen(
-        recipeId: state.pathParameters['recipeId']!,
-      ),
-    )
+        name: 'viewRecipe',
+        path: '/view-recipe',
+        builder: (context, state) {
+          RecipeModel recipe = state.extra as RecipeModel;
+          return ViewRecipeScreen(
+            recipe: recipe,
+          );
+        })
   ],
 );

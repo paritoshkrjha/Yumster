@@ -126,8 +126,12 @@ class RecipeCard extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () => context
-                .push('/view-recipe/:recipeId', extra: {'recipeId': recipe.id}),
+            onPressed: () {
+              context.pushNamed(
+                'viewRecipe',
+                extra: recipe,
+              );
+            },
             style: TextButton.styleFrom(
               backgroundColor: Colors.blue,
               shape: RoundedRectangleBorder(

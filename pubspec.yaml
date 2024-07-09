@@ -74,6 +74,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/timer.png
+    - assets/dish_steps.png
+    - assets/avatar/
     - assets/recipePreferenceImgs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
