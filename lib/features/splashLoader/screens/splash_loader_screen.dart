@@ -22,7 +22,7 @@ class _SplashloaderscreenState extends State<Splashloaderscreen> {
 
   initialize() async {
     await Utils().addDelay(2);
-    SplashController().handleTokenAvailabity(
+    SplashController().handleTokenAvailability(
       navigateToHome: () => context.goNamed('home'),
       navigateToGetStarted: () => context.goNamed('getStarted'),
     );

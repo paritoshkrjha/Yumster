@@ -2,7 +2,7 @@ import 'package:yumster/core/local/device_storage.dart';
 import 'package:yumster/data/repository/splash_repository.dart';
 
 class SplashController {
-  handleTokenAvailabity({
+  handleTokenAvailability({
     required Function() navigateToHome,
     required Function() navigateToGetStarted,
   }) async {

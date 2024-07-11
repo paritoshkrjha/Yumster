@@ -215,11 +215,12 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
           Row(
             children: [
               Expanded(
-                  child: Text(
-                widget.recipe.description,
-                textAlign: TextAlign.justify,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ))
+                child: Text(
+                  widget.recipe.description,
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              )
             ],
           )
         ],
@@ -255,7 +256,7 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
                   vertical: 5,
                 ),
                 child: Text(
-                  'Instruction',
+                  'Instructions',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -377,7 +378,7 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
                   ),
                   _instructionsAndIngredientTabWidget(),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   _instructionAndIngredientWidget(),
                 ],
