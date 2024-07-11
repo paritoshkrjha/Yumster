@@ -14,7 +14,7 @@ class SplashController {
       final response =
           await SplashRepository().validateToken(token: tokenAvailable);
       response.fold((l) {
-        print('Token is invalid');
+        print(l.message);
         navigateToGetStarted();
       }, (r) {
         print('Token is valid');

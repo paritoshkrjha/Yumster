@@ -9,13 +9,14 @@ class UserNotifier extends StateNotifier<UserModel> {
   UserNotifier()
       : super(
           UserModel(
-            avatar: Constants.kUserAvatarPath,
+            id: '',
+            avatarUrl: Constants.kUserAvatarPath,
             email: '',
-            name: '',
+            username: '',
             password: '',
             posts: [],
             preferences: [],
-            savedPosts: [],
+            starredPosts: [],
           ),
         );
 
@@ -24,15 +25,15 @@ class UserNotifier extends StateNotifier<UserModel> {
   }
 
   void updateName(String name) {
-    state = state.copyWith(name: name);
+    state = state.copyWith(username: name);
   }
 
   void updatePassword(String password) {
     state = state.copyWith(password: password);
   }
   
-  void updateAvatarUrl(String avatar) {
-    state = state.copyWith(avatar: avatar);
+  void updateAvatarUrl(String avatarUrl) {
+    state = state.copyWith(avatarUrl: avatarUrl);
   }
 
   void updatePreferences(List<String> preferences) {

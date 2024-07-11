@@ -56,7 +56,7 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
   getInitialValues() {
     _email = ref.read(userProvider).email;
     _password = ref.read(userProvider).password;
-    _userName = ref.read(userProvider).name;
+    _userName = ref.read(userProvider).username;
   }
 
   @override

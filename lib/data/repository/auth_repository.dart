@@ -42,7 +42,7 @@ class AuthRepository {
   FutureEither<void> signUp(UserModel user) async {
     try {
       final payload = {
-        "username": user.name,
+        "username": user.username,
         "email": user.email,
         "password": user.password,
       };
