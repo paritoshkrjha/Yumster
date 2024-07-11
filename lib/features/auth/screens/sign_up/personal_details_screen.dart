@@ -5,7 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/common/widget/loader.dart';
 import 'package:yumster/core/constants/screen_constants.dart';
 import 'package:yumster/core/themes/palette.dart';
-import 'package:yumster/data/providers/user_provider.dart';
+import 'package:yumster/data/providers/new_user_provider.dart';
 import 'package:yumster/features/auth/controller/auth_controller.dart';
 
 class PersonalDetailsScreen extends ConsumerStatefulWidget {
@@ -54,9 +54,9 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
   }
 
   getInitialValues() {
-    _email = ref.read(userProvider).email;
-    _password = ref.read(userProvider).password;
-    _userName = ref.read(userProvider).username;
+    _email = ref.read(newUserProvider).email;
+    _password = ref.read(newUserProvider).password;
+    _userName = ref.read(newUserProvider).username;
   }
 
   @override

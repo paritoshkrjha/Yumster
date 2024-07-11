@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yumster/data/providers/new_user_provider.dart';
 import 'package:yumster/data/providers/page_view_controller_provider.dart';
 import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/data/providers/user_provider.dart';
@@ -30,6 +31,7 @@ class AuthController {
         );
       },
       (r) {
+        ref.read(userProvider.notifier).updateUser(r!);
         onLoginSuccess();
         Fluttertoast.showToast(
           msg: 'Login successful!',
@@ -38,7 +40,6 @@ class AuthController {
       },
     );
   }
-
 
   //signup controller method
   bool validateForm({required GlobalKey<FormState> formKey}) {
@@ -60,9 +61,9 @@ class AuthController {
           curve: Curves.easeInOut,
         );
     ref.read(stepperProvider.notifier).state++;
-    ref.read(userProvider.notifier).updateEmail(email);
-    ref.read(userProvider.notifier).updateName(username);
-    ref.read(userProvider.notifier).updatePassword(password);
+    ref.read(newUserProvider.notifier).updateEmail(email);
+    ref.read(newUserProvider.notifier).updateName(username);
+    ref.read(newUserProvider.notifier).updatePassword(password);
   }
 
   handleBack(WidgetRef ref) {
@@ -78,13 +79,13 @@ class AuthController {
     required WidgetRef ref,
     required BuildContext context,
   }) async {
-    ref.read(userProvider.notifier).updatePreferences(preferences);
-    final user = ref.read(userProvider);
-    final response = await AuthRepository().signUp(user);
-    response.fold(
-      (l) => handleSignUpError(context, l.message),
-      (r) => handleSignUpSuccess(context, ref),
-    );
+    ref.read(newUserProvider.notifier).updatePreferences(preferences);
+    final newUser = ref.read(newUserProvider);
+    final response = await AuthRepository().signUp(newUser);
+    response.fold((l) => handleSignUpError(context, l.message), (r) {
+      ref.read(userProvider.notifier).updateUser(r!);
+      handleSignUpSuccess(context, ref);
+    });
   }
 
   handleSignUpError(BuildContext context, String message) {
@@ -97,7 +98,6 @@ class AuthController {
   }
 
   handleSignUpSuccess(BuildContext context, WidgetRef ref) {
-    // ref.read(userLoggedInStatusProvider.notifier).state = true;
     context.go('/home');
     Fluttertoast.showToast(
       msg: 'Signup successful!',

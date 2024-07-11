@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/common/widget/recipe_card.dart';
 import 'package:yumster/data/model/recipe_model.dart';
+import 'package:yumster/data/model/user_model.dart';
 import 'package:yumster/data/providers/recipe_list_provider.dart';
+import 'package:yumster/data/providers/user_provider.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
@@ -26,6 +28,20 @@ class _HomeFeedState extends State<HomeFeed> {
                   fontSize: 20,
                 ),
           ),
+        ),
+        Consumer(
+          builder: (context, ref, child) {
+            UserModel user = ref.watch(userProvider);
+            return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Welcome, ${user.username}',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 16,
+                    ),
+              ),
+            );
+          },
         ),
         Consumer(
           builder: (context, ref, child) {

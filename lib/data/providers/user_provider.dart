@@ -13,7 +13,6 @@ class UserNotifier extends StateNotifier<UserModel> {
             avatarUrl: Constants.kUserAvatarPath,
             email: '',
             username: '',
-            password: '',
             posts: [],
             preferences: [],
             starredPosts: [],

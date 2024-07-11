@@ -3,11 +3,12 @@ import 'package:fpdart/fpdart.dart';
 import 'package:yumster/core/failure.dart';
 import 'package:yumster/core/local/device_storage.dart';
 import 'package:yumster/core/type_defs.dart';
+import 'package:yumster/data/model/new_user.dart';
 import 'package:yumster/data/model/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRepository {
-  FutureEither<void> login({
+  FutureEither<UserModel?> login({
     required String email,
     required String password,
   }) async {
@@ -33,18 +34,19 @@ class AuthRepository {
 
       DeviceStorage().write(key: 'token', value: responseJson['token']);
 
-      return right(null);
+      UserModel user = UserModel.fromMap(responseJson['user']);
+      return right(user);
     } catch (e) {
       return left(Failure(e.toString()));
     }
   }
 
-  FutureEither<void> signUp(UserModel user) async {
+  FutureEither<UserModel?> signUp(NewUserModel newUser) async {
     try {
       final payload = {
-        "username": user.username,
-        "email": user.email,
-        "password": user.password,
+        "username": newUser.username,
+        "email": newUser.email,
+        "password": newUser.password,
       };
 
       final response = await http.post(
@@ -54,7 +56,6 @@ class AuthRepository {
           'Content-Type': 'application/json',
         },
       );
-
       final responseJson = jsonDecode(response.body);
 
       // Check if the response is successful
@@ -63,8 +64,8 @@ class AuthRepository {
       }
 
       DeviceStorage().write(key: 'token', value: responseJson['token']);
-
-      return right(null);
+      UserModel generatedUser = UserModel.fromMap(responseJson['user']);
+      return right(generatedUser);
     } catch (e) {
       return left(Failure(e.toString()));
     }

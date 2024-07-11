@@ -7,7 +7,6 @@ class UserModel {
   final String id;
   final String username;
   final String email;
-  final String password;
   final List<String> preferences;
   final List<String> posts;
   final List<String> starredPosts;
@@ -17,7 +16,6 @@ class UserModel {
     required this.id,
     required this.username,
     required this.email,
-    this.password = '',
     required this.preferences,
     required this.posts,
     required this.starredPosts,
@@ -38,7 +36,6 @@ class UserModel {
       id: id ?? this.id,
       username: username ?? this.username,
       email: email ?? this.email,
-      password: password ?? this.password,
       preferences: preferences ?? this.preferences,
       posts: posts ?? this.posts,
       starredPosts: starredPosts ?? this.starredPosts,
@@ -51,7 +48,6 @@ class UserModel {
       'id': id,
       'username': username,
       'email': email,
-      'password': password,
       'preferences': preferences,
       'posts': posts,
       'starredPosts': starredPosts,
@@ -84,7 +80,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, username: $username, email: $email, password: $password, preferences: $preferences, posts: $posts, starredPosts: $starredPosts, avatarUrl: $avatarUrl)';
+    return 'UserModel(id: $id, username: $username, email: $email preferences: $preferences, posts: $posts, starredPosts: $starredPosts, avatarUrl: $avatarUrl)';
   }
 
   @override
@@ -94,7 +90,6 @@ class UserModel {
     return other.id == id &&
         other.username == username &&
         other.email == email &&
-        other.password == password &&
         listEquals(other.preferences, preferences) &&
         listEquals(other.posts, posts) &&
         listEquals(other.starredPosts, starredPosts) &&
@@ -106,7 +101,6 @@ class UserModel {
     return id.hashCode ^
         username.hashCode ^
         email.hashCode ^
-        password.hashCode ^
         preferences.hashCode ^
         posts.hashCode ^
         starredPosts.hashCode ^
