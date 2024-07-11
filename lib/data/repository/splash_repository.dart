@@ -20,11 +20,9 @@ class SplashRepository {
       if (response.statusCode != 200) {
         return left(Failure('Token is invalid'));
       }
-
       final responseJson = jsonDecode(response.body);
-      // UserModel user = UserModel.fromMap(responseJson['user']);
-      // return right(user);
-      return right(null);
+      UserModel user = UserModel.fromMap(responseJson['user']);
+      return right(user);
     } catch (e) {
       return left(Failure(e.toString()));
     }

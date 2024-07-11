@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yumster/core/common/widget/loader.dart';
@@ -6,14 +7,14 @@ import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/core/utils.dart';
 import 'package:yumster/features/splashLoader/controller/splash_controller.dart';
 
-class Splashloaderscreen extends StatefulWidget {
+class Splashloaderscreen extends ConsumerStatefulWidget {
   const Splashloaderscreen({super.key});
 
   @override
-  State<Splashloaderscreen> createState() => _SplashloaderscreenState();
+  ConsumerState<Splashloaderscreen> createState() => _SplashloaderscreenState();
 }
 
-class _SplashloaderscreenState extends State<Splashloaderscreen> {
+class _SplashloaderscreenState extends ConsumerState<Splashloaderscreen> {
   @override
   void initState() {
     super.initState();
@@ -25,6 +26,7 @@ class _SplashloaderscreenState extends State<Splashloaderscreen> {
     SplashController().handleTokenAvailability(
       navigateToHome: () => context.goNamed('home'),
       navigateToGetStarted: () => context.goNamed('getStarted'),
+      ref : ref,
     );
   }
 
