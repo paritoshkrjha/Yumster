@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/common/widget/like_widget.dart';
+import 'package:yumster/core/common/widget/star_widget.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 
 class RecipeCard extends ConsumerStatefulWidget {
@@ -67,7 +68,7 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
                       ),
                 ),
               ),
-              _clickToStarred()
+              StarWidget(index: widget.index)
             ],
           ),
           RichText(

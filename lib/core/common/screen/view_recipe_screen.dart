@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/common/widget/back_button.dart';
 import 'package:yumster/core/common/widget/like_widget.dart';
+import 'package:yumster/core/common/widget/star_widget.dart';
 import 'package:yumster/core/constants/constants.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 
@@ -69,21 +69,7 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
               const SizedBox(
                 width: 10,
               ),
-              InkWell(
-                onTap: () {},
-                child: widget.recipe.likes.contains("6683cac4e62e111942e54311")
-                    ? const CircleAvatar(
-                        backgroundColor: Color.fromARGB(255, 255, 208, 0),
-                        child: Icon(
-                          Icons.star_rounded,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        child: Icon(Iconsax.star),
-                      ),
-              ),
+              StarWidget(index: widget.index),
               const SizedBox(
                 width: 5,
               ),
