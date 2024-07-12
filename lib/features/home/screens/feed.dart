@@ -4,6 +4,7 @@ import 'package:yumster/core/common/widget/loader.dart';
 import 'package:yumster/core/common/widget/recipe_card.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 import 'package:yumster/data/providers/recipe_list_provider.dart';
+import 'package:yumster/features/home/feed_controller.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
@@ -13,6 +14,10 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
+  _handleViewRecipe(WidgetRef ref, String postId) {
+    FeedController().updateViewCount(postId, ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -57,10 +62,11 @@ class _HomeFeedState extends State<HomeFeed> {
                     child: ListView.builder(
                       itemBuilder: (context, index) {
                         return RecipeCard(
-                          index: index,
-                          recipe: recipes[index],
-                          onStarred: () {},
-                        );
+                            index: index,
+                            recipe: recipes[index],
+                            onStarred: () {},
+                            onRecipeView: () =>
+                                _handleViewRecipe(ref, recipes[index].id));
                       },
                       itemCount: recipes.length,
                     ),

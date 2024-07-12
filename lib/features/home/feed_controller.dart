@@ -9,12 +9,26 @@ class FeedController {
     if (token != null) {
       final response = await FeedRepository().likePost(postId, token);
       response.fold(
+        // ignore: avoid_print
         (failure) => print(failure.message),
         (recipe) {
           //update the recipe list with the new recipe
           ref.read(recipeListProvider.notifier).updateRecipe(recipe);
-          print(recipe.likes);
-          print('Recipe liked successfully');
+        },
+      );
+    }
+  }
+
+  void updateViewCount(String postId, WidgetRef ref) async {
+    String? token = await DeviceStorage().read(key: 'token');
+    if (token != null) {
+      final response = await FeedRepository().updateViewCount(postId, token);
+      response.fold(
+        // ignore: avoid_print
+        (failure) => print(failure.message),
+        (recipe) {
+          //update the recipe list with the new recipe
+          ref.read(recipeListProvider.notifier).updateRecipe(recipe);
         },
       );
     }

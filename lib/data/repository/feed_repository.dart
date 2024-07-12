@@ -46,4 +46,22 @@ class FeedRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  FutureEither<RecipeModel> updateViewCount(String postId, String token) async {
+    try {
+      final response = await http.post(
+          Uri.parse("http://192.168.0.104:8000/post/$postId/view"),
+          headers: {
+            'Authorization': 'Bearer $token',
+          });
+      if (response.statusCode != 200) {
+        return left(Failure('An error occurred'));
+      }
+      final responseJson = jsonDecode(response.body);
+      RecipeModel recipe = RecipeModel.fromMap(responseJson['post']);
+      return right(recipe);
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }

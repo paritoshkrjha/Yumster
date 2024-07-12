@@ -9,7 +9,9 @@ class RecipeCard extends ConsumerStatefulWidget {
   final int index;
   final RecipeModel recipe;
   final Function() onStarred;
+  final Function() onRecipeView;
   const RecipeCard({
+    required this.onRecipeView,
     super.key,
     required this.recipe,
     required this.onStarred,
@@ -124,6 +126,8 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
                 },
                 extra: widget.recipe,
               );
+              //make call for view count updation
+              widget.onRecipeView();
             },
             style: TextButton.styleFrom(
               backgroundColor: Colors.blue,
