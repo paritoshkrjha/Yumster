@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/common/widget/back_button.dart';
+import 'package:yumster/core/common/widget/like_widget.dart';
 import 'package:yumster/core/constants/constants.dart';
-import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 
 class ViewRecipeScreen extends StatefulWidget {
+  final int index;
   final RecipeModel recipe;
-  const ViewRecipeScreen({super.key, required this.recipe});
+  const ViewRecipeScreen(
+      {super.key, required this.recipe, required this.index});
 
   @override
   State<ViewRecipeScreen> createState() => _ViewRecipeScreenState();
@@ -63,21 +65,7 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
         SizedBox(
           child: Row(
             children: [
-              InkWell(
-                onTap: () {},
-                child: widget.recipe.likes.contains("6683cac4e62e111942e54311")
-                    ? const CircleAvatar(
-                        backgroundColor: Palette.accentColor,
-                        child: Icon(
-                          Iconsax.heart5,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(Iconsax.heart),
-                      ),
-              ),
+              LikeWidget(index: widget.index),
               const SizedBox(
                 width: 10,
               ),

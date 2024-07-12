@@ -56,11 +56,12 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
         name: 'viewRecipe',
-        path: '/view-recipe',
+        path: '/view-recipe/:index',
         builder: (context, state) {
           RecipeModel recipe = state.extra as RecipeModel;
           return ViewRecipeScreen(
             recipe: recipe,
+            index: int.parse(state.pathParameters['index']!),
           );
         })
   ],

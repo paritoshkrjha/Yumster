@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/common/widget/recipe_card.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 import 'package:yumster/data/providers/recipe_list_provider.dart';
-import 'package:yumster/features/home/feed_controller.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
@@ -13,9 +12,6 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
-  _handleLike(WidgetRef ref, String postId) {
-    FeedController().likePost(postId, ref);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +55,6 @@ class _HomeFeedState extends State<HomeFeed> {
                         return RecipeCard(
                           index: index,
                           recipe: recipes[index],
-                          onLiked: () => _handleLike(ref, recipes[index].id),
                           onStarred: () {},
                         );
                       },

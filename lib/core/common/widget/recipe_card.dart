@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:yumster/core/themes/palette.dart';
+import 'package:yumster/core/common/widget/like_widget.dart';
 import 'package:yumster/data/model/recipe_model.dart';
-import 'package:yumster/data/providers/user_provider.dart';
 
 class RecipeCard extends ConsumerStatefulWidget {
   final int index;
   final RecipeModel recipe;
-  final Function() onLiked;
   final Function() onStarred;
   const RecipeCard({
     super.key,
     required this.recipe,
-    required this.onLiked,
     required this.onStarred,
     required this.index,
   });
@@ -92,20 +89,6 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
     );
   }
 
-  Widget _clickToLike() {
-    return InkWell(
-      onTap: widget.onLiked,
-      child: widget.recipe.likes.contains(ref.read(userProvider).id)
-          ? const Icon(
-              Icons.favorite_rounded,
-              color: Palette.accentColor,
-            )
-          : const Icon(
-              Icons.favorite_border_rounded,
-            ),
-    );
-  }
-
   Widget _recipeLikesAndViewSection(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -115,7 +98,7 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
           SizedBox(
             child: Row(
               children: [
-                _clickToLike(),
+                LikeWidget(index: widget.index),
                 const SizedBox(width: 5),
                 Text(
                   widget.recipe.likes.length.toString(),
@@ -136,6 +119,9 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
             onPressed: () {
               context.pushNamed(
                 'viewRecipe',
+                pathParameters: {
+                  'index': widget.index.toString(),
+                },
                 extra: widget.recipe,
               );
             },
