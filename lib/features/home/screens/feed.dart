@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yumster/core/common/widget/loader.dart';
 import 'package:yumster/core/common/widget/recipe_card.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 import 'package:yumster/data/providers/recipe_list_provider.dart';
@@ -12,7 +13,6 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,8 +46,12 @@ class _HomeFeedState extends State<HomeFeed> {
           builder: (context, ref, child) {
             List<RecipeModel> recipes = ref.watch(recipeListProvider);
             return recipes.isEmpty
-                ? const Center(
-                    child: CircularProgressIndicator(),
+                ? const Expanded(
+                    child: Center(
+                      child: CustomLoader(
+                        color: Colors.black,
+                      ),
+                    ),
                   )
                 : Expanded(
                     child: ListView.builder(

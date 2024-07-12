@@ -204,7 +204,7 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
             style: Theme.of(context).elevatedButtonTheme.style!,
             onPressed: () => _handleNext(ref),
             child: _isLoading
-                ? const CustomLoader()
+                ? const CustomLoader(color: Colors.white,)
                 : Text(
                     ScreenConstants
                         .personalDetailsScreenConstants['buttonText']!,

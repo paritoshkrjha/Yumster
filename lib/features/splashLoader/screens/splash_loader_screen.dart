@@ -45,7 +45,7 @@ class _SplashloaderscreenState extends ConsumerState<Splashloaderscreen> {
               color: Colors.white,
             ),
           ),
-          const CustomLoader(),
+          const CustomLoader(color: Colors.white,),
         ],
       ),
     );

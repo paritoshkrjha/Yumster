@@ -178,7 +178,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               ),
                           onPressed: handleLogin,
                           child: isLoading
-                              ? const CustomLoader()
+                              ? const CustomLoader( color: Colors.white,)
                               : Text(
                                   ScreenConstants
                                       .signInScreenConstants['buttonText']!,
