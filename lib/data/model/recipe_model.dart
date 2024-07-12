@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 class RecipeModel {
@@ -86,28 +85,28 @@ class RecipeModel {
 
   factory RecipeModel.fromMap(Map<String, dynamic> map) {
     return RecipeModel(
-      id: map['id'] as String,
+      id: map['_id'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
       ingredients: List<String>.from(
-        (map['ingredients'] as List<String>),
+        (map['ingredients']),
       ),
       steps: List<String>.from(
-        (map['steps'] as List<String>),
+        (map['steps']),
       ),
       duration: map['duration'] as int,
       imageUrl: map['imageUrl'] as String,
       author: Map<String, String>.from(
-        (map['author'] as Map<String, String>),
+        (map['author']),
       ),
       likes: List<String>.from(
-        (map['likes'] as List<String>),
+        (map['likes']),
       ),
       views: map['views'] as int,
       mealType: map['mealType'] as String,
       veg: map['veg'] as bool,
       tags: List<String>.from(
-        (map['tags'] as List<String>),
+        (map['tags']),
       ),
     );
   }

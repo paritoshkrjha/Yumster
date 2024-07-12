@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/common/widget/recipe_card.dart';
 import 'package:yumster/data/model/recipe_model.dart';
-import 'package:yumster/data/model/user_model.dart';
 import 'package:yumster/data/providers/recipe_list_provider.dart';
-import 'package:yumster/data/providers/user_provider.dart';
+import 'package:yumster/features/home/feed_controller.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
@@ -14,6 +13,10 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
+  _handleLike(WidgetRef ref, String postId) {
+    FeedController().likePost(postId, ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,38 +32,42 @@ class _HomeFeedState extends State<HomeFeed> {
                 ),
           ),
         ),
-        Consumer(
-          builder: (context, ref, child) {
-            UserModel user = ref.watch(userProvider);
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Welcome, ${user.username}',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: 16,
-                    ),
-              ),
-            );
-          },
-        ),
+        // Consumer(
+        //   builder: (context, ref, child) {
+        //     UserModel user = ref.watch(userProvider);
+        //     return Container(
+        //       padding: const EdgeInsets.symmetric(horizontal: 20),
+        //       child: Text(
+        //         'Welcome, ${user.username}',
+        //         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        //               fontSize: 16,
+        //             ),
+        //       ),
+        //     );
+        //   },
+        // ),
         Consumer(
           builder: (context, ref, child) {
             List<RecipeModel> recipes = ref.watch(recipeListProvider);
-            return Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return RecipeCard(
-                    index: index,
-                    recipe: recipes[index],
-                    onLiked: () {},
-                    onStarred: () {},
+            return recipes.isEmpty
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return RecipeCard(
+                          index: index,
+                          recipe: recipes[index],
+                          onLiked: () => _handleLike(ref, recipes[index].id),
+                          onStarred: () {},
+                        );
+                      },
+                      itemCount: recipes.length,
+                    ),
                   );
-                },
-                itemCount: recipes.length,
-              ),
-            );
           },
-        )
+        ),
       ],
     );
   }

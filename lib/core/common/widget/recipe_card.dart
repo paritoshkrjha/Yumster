@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/data/model/recipe_model.dart';
+import 'package:yumster/data/providers/user_provider.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends ConsumerStatefulWidget {
   final int index;
   final RecipeModel recipe;
   final Function() onLiked;
   final Function() onStarred;
   const RecipeCard({
     super.key,
+    required this.recipe,
     required this.onLiked,
     required this.onStarred,
-    required this.recipe,
     required this.index,
   });
 
+  @override
+  ConsumerState<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends ConsumerState<RecipeCard> {
   Widget _recipeImg() {
     return Hero(
-      tag: index + 1,
+      tag: widget.index + 1,
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10),
@@ -37,15 +44,14 @@ class RecipeCard extends StatelessWidget {
     );
   }
 
-  Widget _clickToStarred(RecipeModel recipe) {
+  Widget _clickToStarred() {
     return InkWell(
-      onTap: onStarred,
+      onTap: widget.onStarred,
       child: const Icon(Iconsax.star),
     );
   }
 
-  Widget _recipeDetailsAndClickToStarred(
-      BuildContext context, RecipeModel recipe) {
+  Widget _recipeDetailsAndClickToStarred(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -56,13 +62,13 @@ class RecipeCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  recipe.title,
+                  widget.recipe.title,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         fontSize: 22,
                       ),
                 ),
               ),
-              _clickToStarred(recipe)
+              _clickToStarred()
             ],
           ),
           RichText(
@@ -73,7 +79,7 @@ class RecipeCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 TextSpan(
-                  text: recipe.author['username'] ?? 'Author',
+                  text: widget.recipe.author['username'] ?? 'Author',
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -86,20 +92,21 @@ class RecipeCard extends StatelessWidget {
     );
   }
 
-  Widget _clickToLike(RecipeModel recipe) {
+  Widget _clickToLike() {
     return InkWell(
-        onTap: onLiked,
-        child: recipe.likes.contains("6683cac4e62e111942e54311")
-            ? const Icon(
-                Icons.favorite_rounded,
-                color: Palette.accentColor,
-              )
-            : const Icon(
-                Icons.favorite_border_rounded,
-              ));
+      onTap: widget.onLiked,
+      child: widget.recipe.likes.contains(ref.read(userProvider).id)
+          ? const Icon(
+              Icons.favorite_rounded,
+              color: Palette.accentColor,
+            )
+          : const Icon(
+              Icons.favorite_border_rounded,
+            ),
+    );
   }
 
-  Widget _recipeLikesAndViewSection(BuildContext context, RecipeModel recipe) {
+  Widget _recipeLikesAndViewSection(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -108,10 +115,10 @@ class RecipeCard extends StatelessWidget {
           SizedBox(
             child: Row(
               children: [
-                _clickToLike(recipe),
+                _clickToLike(),
                 const SizedBox(width: 5),
                 Text(
-                  recipe.likes.length.toString(),
+                  widget.recipe.likes.length.toString(),
                 ),
                 const SizedBox(width: 15),
                 InkWell(
@@ -120,7 +127,7 @@ class RecipeCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  recipe.views.toString(),
+                  widget.recipe.views.toString(),
                 ),
               ],
             ),
@@ -129,7 +136,7 @@ class RecipeCard extends StatelessWidget {
             onPressed: () {
               context.pushNamed(
                 'viewRecipe',
-                extra: recipe,
+                extra: widget.recipe,
               );
             },
             style: TextButton.styleFrom(
@@ -166,9 +173,9 @@ class RecipeCard extends StatelessWidget {
         children: [
           _recipeImg(),
           const SizedBox(height: 10),
-          _recipeDetailsAndClickToStarred(context, recipe),
+          _recipeDetailsAndClickToStarred(context),
           const SizedBox(height: 10),
-          _recipeLikesAndViewSection(context, recipe),
+          _recipeLikesAndViewSection(context),
           const SizedBox(height: 10),
         ],
       ),
