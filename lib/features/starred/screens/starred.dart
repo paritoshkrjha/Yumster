@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yumster/core/common/widget/loader.dart';
+import 'package:yumster/core/common/widget/star_widget.dart';
+import 'package:yumster/data/model/recipe_model.dart';
+import 'package:yumster/data/providers/starred_recipe_list_provider.dart';
 
 class StarredScreen extends ConsumerStatefulWidget {
   const StarredScreen({super.key});
@@ -11,8 +15,24 @@ class StarredScreen extends ConsumerStatefulWidget {
 class _StarredScreenState extends ConsumerState<StarredScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Starred Screen'),
-    );
+    List<RecipeModel>? starredList = ref.watch(starredListProvider);
+    if (starredList == null) {
+      return const CustomLoader(
+        color: Colors.black,
+      );
+    }
+    return starredList.isEmpty
+        ? const Center(
+            child: Text('No starred recipes'),
+          )
+        : ListView.builder(
+            itemCount: starredList.length,
+            itemBuilder: (context, index) {
+              RecipeModel recipe = starredList[index];
+              return ListTile(
+                  title: Text(recipe.title),
+                  subtitle: Text(recipe.description),
+                  trailing: StarWidget(index: index));
+            });
   }
 }

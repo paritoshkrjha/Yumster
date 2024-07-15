@@ -85,4 +85,24 @@ class FeedRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  Future<List<RecipeModel>> getStarredPosts(String token) async {
+    try {
+      final response = await http
+          .get(Uri.parse('http://192.168.0.104:8000/post/starred'), headers: {
+        'Authorization': 'Bearer $token',
+      });
+      if (response.statusCode != 200) {
+        return [];
+      }
+      final responseJson = jsonDecode(response.body);
+      List<RecipeModel> recipes = [];
+      responseJson['starredPosts'].forEach((post) {
+        recipes.add(RecipeModel.fromMap(post));
+      });
+      return recipes;
+    } catch (e) {
+      return [];
+    }
+  }
 }

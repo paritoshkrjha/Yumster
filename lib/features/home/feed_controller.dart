@@ -22,13 +22,13 @@ class FeedController {
 
   void starPost(String postId, WidgetRef ref) async {
     String? token = await DeviceStorage().read(key: 'token');
-    if(token != null) {
+    if (token != null) {
       final response = await FeedRepository().starPost(postId, token);
       response.fold(
         // ignore: avoid_print
         (failure) => print(failure.message),
         (user) {
-          ref.read(userProvider.notifier).updateUser(user);
+          ref.read(userProvider.notifier).updateStarredPosts(user.starredPosts);
         },
       );
     }
