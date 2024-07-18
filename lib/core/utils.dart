@@ -22,6 +22,42 @@ class Utils {
     );
   }
 
+  showConfirmationDialog(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+           
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              child: Text(
+                'Discard',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              onPressed: () {
+                context.goNamed('home');
+              },
+            ),
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+              ),
+              onPressed: () {
+                context.pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   addDelay(int seconds) {
     return Future.delayed(Duration(seconds: seconds));
   }

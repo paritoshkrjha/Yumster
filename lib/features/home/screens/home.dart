@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/data/providers/navbar_index_provider.dart';
 import 'package:yumster/features/home/screens/feed.dart';
 import 'package:yumster/features/home/widgets/bottom_navigation_bar.dart';
@@ -41,6 +43,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         drawer: const CustomDrawer(),
         body: seletedPage,
         bottomNavigationBar: const CustomBottomNavigationBar(),
+        floatingActionButton: selectedPageIndex == 0
+            ? FloatingActionButton(
+                backgroundColor: Palette.accentColor,
+                foregroundColor: Colors.white,
+                onPressed: () {
+                  context.goNamed('create');
+                },
+                child: const Icon(Icons.add),
+              )
+            : null,
       ),
     );
   }
