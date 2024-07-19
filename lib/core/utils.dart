@@ -10,7 +10,11 @@ class Utils {
           title: Text(title),
           content: Text(message),
           actions: [
-            ElevatedButton(
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
               child: const Text('OK'),
               onPressed: () {
                 context.pop();
@@ -27,7 +31,6 @@ class Utils {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-           
           title: Text(title),
           content: Text(message),
           actions: [
