@@ -44,4 +44,13 @@ class CreatePostController {
     ref.read(stepperProvider.notifier).state++;
     ref.read(newRecipeProvider.notifier).updateIngredients(ingredients);
   }
+
+  void handleSaveSteps({required List<String> steps, required WidgetRef ref}) {
+    ref.read(createPostPageViewControllerProvider).nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+    ref.read(stepperProvider.notifier).state++;
+    ref.read(newRecipeProvider.notifier).updateSteps(steps);
+  }
 }

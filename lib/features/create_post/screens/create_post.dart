@@ -7,6 +7,7 @@ import 'package:yumster/data/providers/create_post_pageview_controller_provider.
 import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/features/create_post/screens/add_basic_details.dart';
 import 'package:yumster/features/create_post/screens/add_ingredients.dart';
+import 'package:yumster/features/create_post/screens/add_steps.dart';
 
 class CreatePost extends StatefulWidget {
   const CreatePost({super.key});
@@ -58,12 +59,7 @@ class _CreatePostState extends State<CreatePost> {
                     children: [
                       const AddBasicDetailsPage(),
                       const AddIngredientsPage(),
-                      Container(
-                        color: Colors.green,
-                        child: const Center(
-                          child: Text('Page 2'),
-                        ),
-                      ),
+                      const AddStepsPage(),
                       Container(
                         color: Colors.blue,
                         child: const Center(
