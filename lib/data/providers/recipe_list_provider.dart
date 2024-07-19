@@ -28,4 +28,8 @@ class RecipeListNotifier extends StateNotifier<List<RecipeModel>> {
       return recipe.id == updatedRecipe.id ? updatedRecipe : recipe;
     }).toList();
   }
+
+ void addRecipeToList(RecipeModel recipe) {
+    state = [recipe, ...state];
+  }
 }

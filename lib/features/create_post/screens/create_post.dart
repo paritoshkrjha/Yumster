@@ -6,6 +6,7 @@ import 'package:yumster/core/utils.dart';
 import 'package:yumster/data/providers/create_post_pageview_controller_provider.dart';
 import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/features/create_post/screens/add_basic_details.dart';
+import 'package:yumster/features/create_post/screens/add_final_details.dart';
 import 'package:yumster/features/create_post/screens/add_ingredients.dart';
 import 'package:yumster/features/create_post/screens/add_steps.dart';
 
@@ -56,22 +57,12 @@ class _CreatePostState extends State<CreatePost> {
                 return Expanded(
                   child: PageView(
                     controller: pageIndexController,
-                    children: [
-                      const AddBasicDetailsPage(),
-                      const AddIngredientsPage(),
-                      const AddStepsPage(),
-                      Container(
-                        color: Colors.blue,
-                        child: const Center(
-                          child: Text('Page 3'),
-                        ),
-                      ),
-                      Container(
-                        color: Colors.yellow,
-                        child: const Center(
-                          child: Text('Page 4'),
-                        ),
-                      ),
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      AddBasicDetailsPage(),
+                      AddIngredientsPage(),
+                      AddStepsPage(),
+                      AddFinalDetailsPage(),
                     ],
                   ),
                 );

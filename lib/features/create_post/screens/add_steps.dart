@@ -22,7 +22,7 @@ class _AddStepsPageState extends ConsumerState<AddStepsPage> {
   _handleNext() async {
     if (_steps.isEmpty) {
       Utils().showAlertDialog(
-          context, 'Alert', 'Please add ingredients to proceed.');
+          context, 'Alert', 'Please add steps to proceed.');
       return;
     }
     FocusScope.of(context).unfocus();
