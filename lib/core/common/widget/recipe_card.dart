@@ -44,13 +44,6 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
     );
   }
 
-  Widget _clickToStarred() {
-    return InkWell(
-      onTap: widget.onStarred,
-      child: const Icon(Iconsax.star),
-    );
-  }
-
   Widget _recipeDetailsAndClickToStarred(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),

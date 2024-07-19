@@ -276,6 +276,7 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
         isInstructionSelected ? widget.recipe.steps : widget.recipe.ingredients;
     int index = 1;
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(
