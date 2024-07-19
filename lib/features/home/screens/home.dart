@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yumster/core/themes/palette.dart';
 import 'package:yumster/data/providers/navbar_index_provider.dart';
+import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/features/home/screens/feed.dart';
 import 'package:yumster/features/home/widgets/bottom_navigation_bar.dart';
 import 'package:yumster/features/home/widgets/drawer.dart';
@@ -48,6 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 backgroundColor: Palette.accentColor,
                 foregroundColor: Colors.white,
                 onPressed: () {
+                  ref.read(stepperProvider.notifier).state = 1;
                   context.goNamed('create');
                 },
                 child: const Icon(Icons.add),
