@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yumster/core/common/widget/loader.dart';
-import 'package:yumster/data/providers/recipe_list_provider.dart';
+import 'package:yumster/data/providers/user_provider.dart';
 import 'package:yumster/features/create_post/controller/create_post_controller.dart';
 
 class AddFinalDetailsPage extends ConsumerStatefulWidget {
@@ -47,8 +47,8 @@ class _AddFinalDetailsPageState extends ConsumerState<AddFinalDetailsPage> {
         onFailure: (message) {
           Fluttertoast.showToast(msg: message);
         },
-        onSuccess: (recipe) {
-          ref.read(recipeListProvider.notifier).addRecipeToList(recipe);
+        onSuccess: (user) {
+          ref.read(userProvider.notifier).updatePosts(user.posts);
           Fluttertoast.showToast(msg: 'Recipe posted successfully!');
           context.go('/home');
         });

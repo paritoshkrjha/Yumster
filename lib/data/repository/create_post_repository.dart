@@ -5,10 +5,10 @@ import 'package:yumster/core/failure.dart';
 import 'package:yumster/core/type_defs.dart';
 import 'package:yumster/data/model/new_recipe.dart';
 import 'package:http/http.dart' as http;
-import 'package:yumster/data/model/recipe_model.dart';
+import 'package:yumster/data/model/user_model.dart';
 
 class CreatePostRepository {
-  FutureEither<RecipeModel> createPost(
+  FutureEither<UserModel> createPost(
       NewRecipeModel newRecipe, String token) async {
     try {
       final payload = {
@@ -35,8 +35,8 @@ class CreatePostRepository {
       if (response.statusCode != 201) {
         return left(Failure(responseJson['message']));
       }
-      RecipeModel recipe = RecipeModel.fromMap(responseJson['post']);
-      return right(recipe);
+      UserModel user = UserModel.fromMap(responseJson['user']);
+      return right(user);
     } catch (e) {
       return left(Failure(e.toString()));
     }

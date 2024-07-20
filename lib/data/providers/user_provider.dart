@@ -46,4 +46,8 @@ class UserNotifier extends StateNotifier<UserModel> {
   void updateStarredPosts(List<String> starredPosts) {
     state = state.copyWith(starredPosts: starredPosts);
   }
+
+  void updatePosts(List<String> posts) {
+    state = state.copyWith(posts: posts);
+  }
 }

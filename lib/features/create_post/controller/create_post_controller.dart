@@ -56,17 +56,18 @@ class CreatePostController {
     ref.read(newRecipeProvider.notifier).updateSteps(steps);
   }
 
-  void handlePostRecipe(
-      {String? mealType,
-      required bool isVeg,
-      required bool isGlutenFree,
-      required bool isVegan,
-      required bool isDairyFree,
-      required String cuisineType,
-      required int duration,
-      required Function onFailure,
-      required Function onSuccess,
-      required WidgetRef ref}) async {
+  void handlePostRecipe({
+    String? mealType,
+    required bool isVeg,
+    required bool isGlutenFree,
+    required bool isVegan,
+    required bool isDairyFree,
+    required String cuisineType,
+    required int duration,
+    required Function onFailure,
+    required Function onSuccess,
+    required WidgetRef ref,
+  }) async {
     ref.read(newRecipeProvider.notifier).updateDuration(duration);
     ref.read(newRecipeProvider.notifier).updateMealType(mealType!);
     ref.read(newRecipeProvider.notifier).updateVeg(isVeg);
@@ -88,6 +89,6 @@ class CreatePostController {
       token!,
     );
     response.fold(
-        (left) => onFailure(left.message), (right) => onSuccess(right));
+        (left) => onFailure(left.message), (user) => onSuccess(user));
   }
 }

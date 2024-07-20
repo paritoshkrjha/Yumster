@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:yumster/core/constants/constants.dart';
 import 'package:yumster/data/providers/user_provider.dart';
 
@@ -11,9 +13,14 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  void _navigateToMyPostsScreen() {
+    context.pushNamed('myPosts');
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
+    print(user);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -99,6 +106,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           thickness: 1,
           height: 30,
           color: Colors.grey.shade300,
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: ListTile(
+            onTap: _navigateToMyPostsScreen,
+            leading: const Icon(Iconsax.grid_4),
+            title: Text(
+              'My posts',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            trailing: const Icon(Icons.chevron_right),
+          ),
         ),
       ],
     );

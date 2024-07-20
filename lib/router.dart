@@ -8,6 +8,7 @@ import 'package:yumster/features/auth/screens/login.dart';
 import 'package:yumster/features/auth/screens/sign_up/sign_up.dart';
 import 'package:yumster/features/create_post/screens/create_post.dart';
 import 'package:yumster/features/home/screens/home.dart';
+import 'package:yumster/features/profile/screens/my_posts.dart';
 import 'package:yumster/features/splashLoader/screens/splash_loader_screen.dart';
 
 final GoRouter router = GoRouter(
@@ -70,6 +71,11 @@ final GoRouter router = GoRouter(
       path: '/create',
       name: 'create',
       builder: (context, state) => const CreatePost(),
+    ),
+     GoRoute(
+      path: '/my-posts',
+      name: 'myPosts',
+      builder: (context, state) => const MyPostsScreen(),
     )
   ],
 );

@@ -1,15 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/local/device_storage.dart';
 import 'package:yumster/data/model/recipe_model.dart';
+import 'package:yumster/data/providers/user_provider.dart';
 import 'package:yumster/data/repository/feed_repository.dart';
 
 final recipeListProvider =
     StateNotifierProvider<RecipeListNotifier, List<RecipeModel>>((ref) {
-  return RecipeListNotifier();
+      final userPosts = ref.watch(userProvider.select((user) => user.posts));
+  return RecipeListNotifier(userPosts);
 });
 
 class RecipeListNotifier extends StateNotifier<List<RecipeModel>> {
-  RecipeListNotifier() : super([]) {
+  final List<String> userPosts;
+  RecipeListNotifier(this.userPosts) : super([]) {
     fetchRecipes();
   }
 

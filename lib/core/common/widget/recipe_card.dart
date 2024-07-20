@@ -10,7 +10,11 @@ class RecipeCard extends ConsumerStatefulWidget {
   final int index;
   final RecipeModel recipe;
   final Function() onRecipeView;
+  final bool showDeleteButton;
+  final Function() onDelete;
   const RecipeCard({
+    required this.showDeleteButton,
+    required this.onDelete,
     required this.onRecipeView,
     super.key,
     required this.recipe,
@@ -30,13 +34,37 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
         ),
-        child: SizedBox(
-          width: double.infinity,
-          height: 250,
-          child: Image.asset(
-            'assets/tempFood.jpg',
-            fit: BoxFit.cover,
-          ),
+        child: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 250,
+              child: Image.asset(
+                'assets/tempFood.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+            if (widget.showDeleteButton)
+              Positioned(
+                top: 8, // Adjust the position as needed
+                right: 8, // Adjust the position as needed
+                child: InkWell(
+                  onTap: widget.onDelete,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Colors.red, // Semi-transparent background
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

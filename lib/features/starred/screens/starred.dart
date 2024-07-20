@@ -31,6 +31,8 @@ class _StarredScreenState extends ConsumerState<StarredScreen> {
               RecipeModel recipe = starredList[index];
               return RecipeCard(
                 onRecipeView: () {},
+                onDelete: () {},
+                showDeleteButton: false,
                 recipe: recipe,
                 index: index,
               );
