@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:yumster/features/auth/controller/auth_controller.dart';
 
@@ -11,7 +12,30 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
   _handleLogOut() {
-    AuthController().handleLogOut(context);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                context.pop(context);
+                AuthController().handleLogOut(context);
+              },
+              child: const Text('Log Out'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
