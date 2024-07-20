@@ -1,6 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:yumster/core/common/widget/loader.dart';
+import 'package:yumster/core/utils.dart';
 import 'package:yumster/data/providers/new_recipe_provider.dart';
 import 'package:yumster/features/create_post/controller/create_post_controller.dart';
 
@@ -18,15 +23,31 @@ class _AddBasicDetailsPageState extends ConsumerState<AddBasicDetailsPage> {
   var _recipeName = '';
   var _recipeDescription = '';
 
-  getInitialValues() {
+  Uint8List? _image;
+
+  void _selectImage() async {
+    Uint8List? img = await Utils().pickImage(ImageSource.gallery);
+    if (img == null) {
+      return;
+    }
+    setState(() {
+      _image = img;
+    });
+  }
+
+  void getInitialValues() {
     _recipeName = ref.read(newRecipeProvider).title;
     _recipeDescription = ref.read(newRecipeProvider).description;
   }
 
-  _handleNext() async {
+  void _handleNext() async {
     FocusScope.of(context).unfocus();
     final validate = CreatePostController().validateForm(formKey: _formKey);
     if (!validate) {
+      return;
+    }
+    if (_image == null) {
+      Utils().showAlertDialog(context, 'Alert', 'Please select an image');
       return;
     }
     setState(() {
@@ -41,6 +62,7 @@ class _AddBasicDetailsPageState extends ConsumerState<AddBasicDetailsPage> {
     CreatePostController().handleSaveBasicDetails(
       recipeName: _recipeName,
       recipeDescription: _recipeDescription,
+      recipeImage: _image!,
       ref: ref,
     );
   }
@@ -133,9 +155,45 @@ class _AddBasicDetailsPageState extends ConsumerState<AddBasicDetailsPage> {
                         _recipeDescription = newValue!,
                       },
                     ),
-                    const SizedBox(
-                      height: 20,
+                    Text(
+                      'Recipe Image',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                      child: InkWell(
+                        onTap: _selectImage,
+                        child: _image != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    12), // This rounds the image's corners to match the container
+                                child: Image.memory(
+                                  _image!,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : const Center(
+                                child: Icon(
+                                  Iconsax.gallery_add,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                      ),
+                    )
                   ],
                 ),
               ),

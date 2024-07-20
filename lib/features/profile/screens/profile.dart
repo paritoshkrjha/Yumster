@@ -20,7 +20,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
-    print(user);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

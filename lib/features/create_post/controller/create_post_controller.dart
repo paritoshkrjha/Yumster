@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/local/device_storage.dart';
 import 'package:yumster/data/providers/create_post_pageview_controller_provider.dart';
 import 'package:yumster/data/providers/new_recipe_provider.dart';
+import 'package:yumster/data/providers/recipe_image_provider.dart';
 import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/data/repository/create_post_repository.dart';
 
@@ -18,6 +21,7 @@ class CreatePostController {
   void handleSaveBasicDetails({
     required String recipeName,
     required String recipeDescription,
+    required Uint8List recipeImage,
     required WidgetRef ref,
   }) {
     ref.read(createPostPageViewControllerProvider).nextPage(
@@ -25,6 +29,7 @@ class CreatePostController {
           curve: Curves.easeInOut,
         );
     ref.read(stepperProvider.notifier).state++;
+    ref.read(recipeImageProvider.notifier).state = recipeImage;
     ref.read(newRecipeProvider.notifier).updateTitle(recipeName);
     ref.read(newRecipeProvider.notifier).updateDescription(recipeDescription);
   }
@@ -88,7 +93,6 @@ class CreatePostController {
       ref.read(newRecipeProvider),
       token!,
     );
-    response.fold(
-        (left) => onFailure(left.message), (user) => onSuccess(user));
+    response.fold((left) => onFailure(left.message), (user) => onSuccess(user));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Utils {
   showAlertDialog(BuildContext context, String title, String message) {
@@ -63,5 +64,15 @@ class Utils {
 
   addDelay(int seconds) {
     return Future.delayed(Duration(seconds: seconds));
+  }
+
+  pickImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+
+    XFile? file = await picker.pickImage(source: source);
+    if(file != null) {
+      return await file.readAsBytes();
+    }
+    print('No image selected.');
   }
 }
