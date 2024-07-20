@@ -4,7 +4,7 @@ class Constants {
 
   static const String kUserSignUpUrl = 'http://192.168.0.104:8000/user/signup';
 
-  static const String kUserAvatarPath = 'assets/avatar/userAvatar.png';
+  static const String kUserAvatarPath = 'assets/avatar/avatar9.png';
 
   static const recipePreferences = {
     'veg': {

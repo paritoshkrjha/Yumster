@@ -30,7 +30,6 @@ class CreatePostRepository {
         },
         body: jsonEncode(payload),
       );
-      print(response.body);
       final responseJson = jsonDecode(response.body);
       if (response.statusCode != 201) {
         return left(Failure(responseJson['message']));
