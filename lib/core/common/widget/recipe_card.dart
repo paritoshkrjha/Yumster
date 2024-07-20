@@ -9,13 +9,11 @@ import 'package:yumster/data/model/recipe_model.dart';
 class RecipeCard extends ConsumerStatefulWidget {
   final int index;
   final RecipeModel recipe;
-  final Function() onStarred;
   final Function() onRecipeView;
   const RecipeCard({
     required this.onRecipeView,
     super.key,
     required this.recipe,
-    required this.onStarred,
     required this.index,
   });
 

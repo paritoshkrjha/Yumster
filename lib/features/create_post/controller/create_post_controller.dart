@@ -87,7 +87,6 @@ class CreatePostController {
       ref.read(newRecipeProvider),
       token!,
     );
-    print('here');
     response.fold(
         (left) => onFailure(left.message), (right) => onSuccess(right));
   }
