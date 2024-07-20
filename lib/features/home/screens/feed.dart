@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/common/widget/loader.dart';
-import 'package:yumster/core/common/widget/recipe_card.dart';
+import 'package:yumster/core/common/widget/recipe_page.dart';
 import 'package:yumster/data/model/recipe_model.dart';
 import 'package:yumster/data/providers/recipe_list_provider.dart';
 import 'package:yumster/features/home/feed_controller.dart';
@@ -33,20 +33,6 @@ class _HomeFeedState extends State<HomeFeed> {
                 ),
           ),
         ),
-        // Consumer(
-        //   builder: (context, ref, child) {
-        //     UserModel user = ref.watch(userProvider);
-        //     return Container(
-        //       padding: const EdgeInsets.symmetric(horizontal: 20),
-        //       child: Text(
-        //         'Welcome, ${user.username}',
-        //         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-        //               fontSize: 16,
-        //             ),
-        //       ),
-        //     );
-        //   },
-        // ),
         Consumer(
           builder: (context, ref, child) {
             List<RecipeModel> recipes = ref.watch(recipeListProvider);
@@ -59,16 +45,20 @@ class _HomeFeedState extends State<HomeFeed> {
                     ),
                   )
                 : Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return RecipeCard(
-                            index: index,
-                            recipe: recipes[index],
-                            onStarred: () {},
-                            onRecipeView: () =>
-                                _handleViewRecipe(ref, recipes[index].id));
-                      },
+                    child: PageView.builder(
                       itemCount: recipes.length,
+                      pageSnapping: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return RecipePageWidget(
+                          index: index,
+                          recipe: recipes[index],
+                          onRecipeView: () => _handleViewRecipe(
+                            ref,
+                            recipes[index].id,
+                          ),
+                        );
+                      },
                     ),
                   );
           },
@@ -77,3 +67,4 @@ class _HomeFeedState extends State<HomeFeed> {
     );
   }
 }
+
