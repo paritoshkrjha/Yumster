@@ -69,7 +69,7 @@ class _ViewRecipeScreenState extends State<ViewRecipeScreen> {
               const SizedBox(
                 width: 10,
               ),
-              StarWidget(index: widget.index),
+              StarWidget(recipeId: widget.recipe.id),
               const SizedBox(
                 width: 5,
               ),

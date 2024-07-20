@@ -72,7 +72,7 @@ class _RecipePageWidgetState extends ConsumerState<RecipePageWidget> {
                       ),
                 ),
               ),
-              StarWidget(index: widget.index)
+              StarWidget(recipeId: widget.recipe.id),
             ],
           ),
           RichText(

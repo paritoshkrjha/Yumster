@@ -59,7 +59,7 @@ class _RecipeCardState extends ConsumerState<RecipeCard> {
                       ),
                 ),
               ),
-              StarWidget(index: widget.index)
+              StarWidget(recipeId: widget.recipe.id),
             ],
           ),
           RichText(
