@@ -34,6 +34,14 @@ class _CustomBottomNavigationBarState
           activeColor: Colors.black,
           inactiveColor: Colors.grey,
           icon: const Icon(
+            Iconsax.search_normal,
+          ),
+          title: const Text('Search'),
+        ),
+        FlashyTabBarItem(
+          activeColor: Colors.black,
+          inactiveColor: Colors.grey,
+          icon: const Icon(
             Icons.star_outline_rounded,
             size: 26,
           ),

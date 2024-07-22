@@ -9,6 +9,7 @@ import 'package:yumster/features/home/screens/feed.dart';
 import 'package:yumster/features/home/widgets/bottom_navigation_bar.dart';
 import 'package:yumster/features/home/widgets/drawer.dart';
 import 'package:yumster/features/profile/screens/profile.dart';
+import 'package:yumster/features/search/screens/search.dart';
 import 'package:yumster/features/starred/screens/starred.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -62,12 +63,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
 Map<int, dynamic> kHomeScreen = {
   0: const HomeFeed(),
-  1: const StarredScreen(),
-  2: const ProfileScreen(),
+  1: const SearchScreen(),
+  2: const StarredScreen(),
+  3: const ProfileScreen(),
 };
 
 Map<int, String> kHomeScreenTitle = {
   0: 'Yumster',
-  1: 'Starred',
-  2: 'Profile',
+  1: 'Search',
+  2: 'Starred',
+  3: 'Profile',
 };
