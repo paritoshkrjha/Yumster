@@ -21,15 +21,20 @@ class _AddBasicDetailsPageState extends ConsumerState<AddBasicDetailsPage> {
   bool _isLoading = false;
   var _recipeName = '';
   var _recipeDescription = '';
+  bool clicked = false;
 
   Uint8List? _image;
 
   void _selectImage() async {
+    setState(() {
+      clicked = true;
+    });
     Uint8List? img = await Utils().pickImage(ImageSource.gallery);
     if (img == null) {
       return;
     }
     setState(() {
+      clicked = false;
       _image = img;
     });
   }
@@ -181,6 +186,7 @@ class _AddBasicDetailsPageState extends ConsumerState<AddBasicDetailsPage> {
                                     12), // This rounds the image's corners to match the container
                                 child: Image.memory(
                                   _image!,
+                                  
                                   fit: BoxFit.cover,
                                 ),
                               )

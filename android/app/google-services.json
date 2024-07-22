@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "347628729371",
+    "project_id": "yumster-69b0d",
+    "storage_bucket": "yumster-69b0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347628729371:android:88631e6231b24b0fd434be",
+        "android_client_info": {
+          "package_name": "com.example.yumster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqcFqejEItlguN0qXEVrCI8lRTuJ04DPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

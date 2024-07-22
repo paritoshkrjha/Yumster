@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yumster/core/local/device_storage.dart';
@@ -8,6 +7,7 @@ import 'package:yumster/data/providers/new_recipe_provider.dart';
 import 'package:yumster/data/providers/recipe_image_provider.dart';
 import 'package:yumster/data/providers/stepper_provider.dart';
 import 'package:yumster/data/repository/create_post_repository.dart';
+import 'package:yumster/data/repository/firebase_repository.dart';
 
 class CreatePostController {
   bool validateForm({required GlobalKey<FormState> formKey}) {
@@ -88,6 +88,12 @@ class CreatePostController {
       tags.add('dairy-free');
     }
     ref.read(newRecipeProvider.notifier).updateTags(tags);
+    Uint8List image = ref.read(recipeImageProvider)!;
+    String fileName =
+        '${ref.read(newRecipeProvider).title} - ${DateTime.now().toString()}';
+    String downlaodUrl = await FirebaseRepository()
+        .uploadImageToFirebaseStorage(fileName: fileName, file: image);
+    ref.read(newRecipeProvider.notifier).updateImageUrl(downlaodUrl);
     String? token = await DeviceStorage().read(key: 'token');
     final response = await CreatePostRepository().createPost(
       ref.read(newRecipeProvider),

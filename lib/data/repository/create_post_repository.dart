@@ -10,6 +10,7 @@ import 'package:yumster/data/model/user_model.dart';
 class CreatePostRepository {
   FutureEither<UserModel> createPost(
       NewRecipeModel newRecipe, String token) async {
+    print(newRecipe);
     try {
       final payload = {
         "title": newRecipe.title,

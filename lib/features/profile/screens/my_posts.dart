@@ -17,8 +17,27 @@ class MyPostsScreen extends ConsumerStatefulWidget {
 
 class _MyPostsScreenState extends ConsumerState<MyPostsScreen> {
   _handleDelete(String postId) {
-    print('here');
-    ProfileController().deletePost(postId, ref);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Delete Post'),
+            content: const Text('Are you sure you want to delete this post?'),
+            actions: [
+              TextButton(
+                onPressed: () => context.pop(),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.pop();
+                  ProfileController().deletePost(postId, ref);
+                },
+                child: const Text('Delete'),
+              ),
+            ],
+          );
+        });
   }
 
   @override

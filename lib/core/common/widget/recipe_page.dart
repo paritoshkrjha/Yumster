@@ -31,13 +31,20 @@ class _RecipePageWidgetState extends ConsumerState<RecipePageWidget> {
           topRight: Radius.circular(10),
         ),
         child: SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: Image.asset(
-            'assets/tempFood.jpg',
-            fit: BoxFit.cover,
-          ),
-        ),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.4,
+            child: Image.asset('assets/tempFood.jpg', fit: BoxFit.cover)
+            // Image.network(
+            //   widget.recipe.imageUrl,
+            //   loadingBuilder: (context, child, loadingProgress) =>
+            //       loadingProgress == null
+            //           ? child
+            //           : const Center(
+            //               child: CircularProgressIndicator(),
+            //             ),
+            //   fit: BoxFit.cover,
+            // )
+            ),
       ),
     );
   }
