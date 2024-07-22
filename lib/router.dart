@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:go_router/go_router.dart';
 import 'package:yumster/core/common/screen/view_recipe_screen.dart';
 import 'package:yumster/core/common/widget/loading_page.dart';
@@ -9,6 +11,7 @@ import 'package:yumster/features/auth/screens/sign_up/sign_up.dart';
 import 'package:yumster/features/create_post/screens/create_post.dart';
 import 'package:yumster/features/home/screens/home.dart';
 import 'package:yumster/features/profile/screens/my_posts.dart';
+import 'package:yumster/features/search/screens/search_results.dart';
 import 'package:yumster/features/splashLoader/screens/splash_loader_screen.dart';
 
 final GoRouter router = GoRouter(
@@ -72,10 +75,18 @@ final GoRouter router = GoRouter(
       name: 'create',
       builder: (context, state) => const CreatePost(),
     ),
-     GoRoute(
+    GoRoute(
       path: '/my-posts',
       name: 'myPosts',
       builder: (context, state) => const MyPostsScreen(),
-    )
+    ),
+    GoRoute(
+      name: 'searchResults',
+      path: '/search-results',
+      builder: (context, state) {
+        Uint8List image = state.extra as Uint8List;
+        return SearchResultsScreen(image: image);
+      },
+    ),
   ],
 );
